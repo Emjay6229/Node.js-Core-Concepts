@@ -50,11 +50,11 @@ Node.js is written mostly with C/C++. As a program that is supposed to run web s
 By default, I/O operations are thread blocking. But Node.js' architecture is designed in such a way that it executes I/O operations without blocking the (main) thread (by leveraging the I/O library called libuv which uses worker threads to handle potential blocking I/O tasks thus making them non-blocking to the main-thread). But the same is not true for CPU-intensive operations as they are capable of blocking the main thread since Node.js uses only a single-thread.
 
 Consider the following;
-    `console.log('A'); 
+    `console.log('A'); <br /><br />
       
-    setTimeout(() => { 
-        console.log('B'); 
-    }, 3000); 
+    setTimeout(() => {<br /> 
+        console.log('B'); <br />
+    }, 3000); <br /><br />
           
     console.log('C');` 
 
