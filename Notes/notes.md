@@ -1,15 +1,15 @@
 ### Extensions
-Material Theme
-Material Icon Theme
+- [x] Material Theme
+- [x] Material Icon Theme
 
 ### Tools
-- Wireshark - To inspect network packets on a socket
-- Postman (or any API testing tool)
-- A Browser
-- NVM or NVM-Windows
-- Node.js (LTS)
-- An IDE
-- A Terminal
+- [x] Wireshark - To inspect network packets on a socket
+- [x] Postman (or any API testing tool)
+- [x] A Browser
+- [x] NVM or NVM-Windows
+- [x] Node.js (LTS)
+- [x] An IDE
+- [x] A Terminal
 
 # ABOUT NODEJS
 
