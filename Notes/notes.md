@@ -84,9 +84,9 @@ By leveraging event-driven architecture and the use of callbacks as a mechanism 
 e.g
 
 `app.get('/async-task', function (req, res) {
-    if (Object.keys(req.body).length == 0) {
-        return "request body is an empty object";
-    }
+    if (Object.keys(req.body).length === 0) {
+        return "request body is empty';
+       }
     return "request payload is = " + req.body;
 })`
 
