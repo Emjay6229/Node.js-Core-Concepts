@@ -82,6 +82,7 @@ Node.js listens for these events and triggers the associated callback functions 
 By leveraging event-driven architecture and the use of callbacks as a mechanism to return control to the event Loop, Node.js is able to implement asynchronicity and handle real-time processing.
 
 e.g 
+
 `app.get('/async-task', function (req, res) {
     if (Object.keys(req.body).length == 0) {
         return "request body is an empty object";
