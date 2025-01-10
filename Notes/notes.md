@@ -36,11 +36,11 @@ Since most modern OS kernels are multi-threaded, they can handle multiple operat
 NB: Wrapping the cpu-intensive task in a promise doesn't help.
 
 ### I/O-intensive tasks (uses the event loop)
-- [x] DNS: dns.lookup(), dns.lookupService().
-- [x] File System: All file system APIs except fs.FSWatcher() and those that are explicitly synchronous use libuv's threadpool.
+- [x] DNS: `dns.lookup(), dns.lookupService()`.
+- [x] File System: All file system APIs except `fs.FSWatcher()` and those that are explicitly synchronous use libuv's threadpool.
 
 ### CPU-intensive tasks (uses the thread pool)
-- [x] Crypto: crypto.pbkdf2(), crypto.scrypt(), crypto.randomBytes(), crypto.randomFill(), crypto.generateKeyPair().
+- [x] Crypto: `crypto.pbkdf2(), crypto.scrypt(), crypto.randomBytes(), crypto.randomFill(), crypto.generateKeyPair()`.
 - [x] Zlib: All zlib APIs except those that are explicitly synchronous use libuv's threadpool.
 
 In many Node.js applications, these APIs above are the only sources of tasks for the Worker Pool. Applications and modules that use a C++ add-on can submit other tasks to the Worker Pool.
@@ -94,7 +94,7 @@ app.get('/async-task', function (req, res) {
 })
 ```
 
-A request to route ‘/async-task' is an event. This event will trigger the main thread (event loop) to pick it up and execute the callback function associated with the route. If the callback is synchronous (like this code example), the request is handled immediately, and the response is sent back to the client without blocking the event loop. Once the callback finishes, the main thread (event loop) is free to handle other incoming requests. If multiple requests come in almost simultaneously, Node.js will handle them concurrently. The event loop won't be stalled waiting for one request to finish before handling the next one. Each request is processed as soon as it arrives, as long as the previous request didn't involve any blocking operation.
+A request to route `‘/async-task'` is an event. This event will trigger the main thread (event loop) to pick it up and execute the callback function associated with the route. If the callback is synchronous (like this code example), the request is handled immediately, and the response is sent back to the client without blocking the event loop. Once the callback finishes, the main thread (event loop) is free to handle other incoming requests. If multiple requests come in almost simultaneously, Node.js will handle them concurrently. The event loop won't be stalled waiting for one request to finish before handling the next one. Each request is processed as soon as it arrives, as long as the previous request didn't involve any blocking operation.
 
 ### Don’t Block the Event Loop (aka the main thread)
 Like most solutions, there are advantages and disadvantages, and Node.js is not an exclusion of this. Since we know Node.js runs using the event loop, aka as the main thread, blocking the loop will indeed prevent the system from running other instructions regardless of whether they belong to a single process or multiple different processes.
