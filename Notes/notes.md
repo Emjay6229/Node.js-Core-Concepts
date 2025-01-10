@@ -50,23 +50,24 @@ Node.js is written mostly with C/C++. As a program that is supposed to run web s
 By default, I/O operations are thread blocking. But Node.js' architecture is designed in such a way that it executes I/O operations without blocking the (main) thread (by leveraging the I/O library called libuv which uses worker threads to handle potential blocking I/O tasks thus making them non-blocking to the main-thread). But the same is not true for CPU-intensive operations as they are capable of blocking the main thread since Node.js uses only a single-thread.
 
 Consider the following;
-    console.log('A'); 
+    `console.log('A'); 
       
     setTimeout(() => { 
         console.log('B'); 
     }, 3000); 
           
-    console.log('C'); 
+    console.log('C');` 
 
 When the JS engine tries to execute the above programs, it places the first statement in the call-stack which gets executed and prints A in the console and gets popped out of the stack. Now, it places the second statement in the call stack and when it tries to execute the statement, it finds out that setTimeout() doesn’t belong to JS so it pops out the function and hands it to the appropriate Web/Node API to get executed there. Since the call stack is now again empty, it places the third statement in the stack and executes it thus printing C in the console.
-output
+
+`output
  A 
  C 
- B
+ B`
 
 Non-blocking tasks include;
-- Short synchronous operations
-- Asynchronous I/O operations
+- [x] Short synchronous operations
+- [x] Asynchronous I/O operations
 
 ## THE EVENT-DRIVEN ARCHITECTURE
 
@@ -78,13 +79,12 @@ Node.js listens for these events and triggers the associated callback functions 
 By leveraging event-driven architecture and the use of callbacks as a mechanism to return control to the event Loop, Node.js is able to implement asynchronicity and handle real-time processing.
 
 e.g 
-app.get('/async-task', function (req, res) {
+`app.get('/async-task', function (req, res) {
        if (Object.keys(req.body).length == 0) {
             return "request body is an empty object";
     }
-    
     return "request payload is = " + req.body;
-})
+  })`
 
 A request to route ‘/async-task' is an event. This event will trigger the main thread (event loop) to pick it up and execute the callback function associated with the route. If the callback is synchronous (like this code example), the request is handled immediately, and the response is sent back to the client without blocking the event loop. Once the callback finishes, the main thread (event loop) is free to handle other incoming requests. If multiple requests come in almost simultaneously, Node.js will handle them concurrently. The event loop won't be stalled waiting for one request to finish before handling the next one. Each request is processed as soon as it arrives, as long as the previous request didn't involve any blocking operation.
 
@@ -96,11 +96,11 @@ Yes.
 
 However, it is important to clarify the event loop’s ability to “resume” an I/O operation process doesn’t mean it will be capable of getting away around with an intensive CPU operation. The beauty of an I/O operation is to use external CPU processing power to execute a process instead of the V8. However, if our Node.js application is the one using intensive CPU processing power to execute a process, it means we cannot execute other sets of instructions until the heavy processing power instruction completes. This is called blocking the event loop.
 
-SOFTWARE PROJECTS
-Build a Chat app on a TCP server
-Build an e-learning platform
-Build a search engine using apache lucene OR RAG
-Build a recomendation system with Redis Database
-Build an async I/O library
-Build a simple web browser
-Build a JavaScript compiler/interpreter that can live outside a runtime environment.
+# SOFTWARE PROJECTS
+- [x] Build a Chat app on a TCP server
+- [x] Build an e-learning platform
+- [x] Build a search engine using apache lucene OR RAG
+- [x] Build a recomendation system with Redis Database
+- [x] Build an async I/O library
+- [x] Build a simple web browser
+- [x] Build a JavaScript compiler/interpreter that can live outside a runtime environment.
