@@ -63,10 +63,12 @@ Consider the following;
 
 When the JS engine tries to execute the above programs, it places the first statement in the call-stack which gets executed and prints A in the console and gets popped out of the stack. Now, it places the second statement in the call stack and when it tries to execute the statement, it finds out that setTimeout() doesn’t belong to JS so it pops out the function and hands it to the appropriate Web/Node API to get executed there. Since the call stack is now again empty, it places the third statement in the stack and executes it thus printing C in the console.
 
-`output
+```
+output
     A
     C
-    B`
+    B
+```
 
 Non-blocking tasks include;
 - [x] Short synchronous operations
@@ -83,12 +85,14 @@ By leveraging event-driven architecture and the use of callbacks as a mechanism 
 
 e.g
 
-`app.get('/async-task', function (req, res) {
+```
+app.get('/async-task', function (req, res) {
     if (Object.keys(req.body).length === 0) {
         return "request body is empty';
-       }
+    }
     return "request payload is = " + req.body;
-})`
+})
+```
 
 A request to route ‘/async-task' is an event. This event will trigger the main thread (event loop) to pick it up and execute the callback function associated with the route. If the callback is synchronous (like this code example), the request is handled immediately, and the response is sent back to the client without blocking the event loop. Once the callback finishes, the main thread (event loop) is free to handle other incoming requests. If multiple requests come in almost simultaneously, Node.js will handle them concurrently. The event loop won't be stalled waiting for one request to finish before handling the next one. Each request is processed as soon as it arrives, as long as the previous request didn't involve any blocking operation.
 
